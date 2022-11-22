@@ -87,7 +87,7 @@ main {
   margin-bottom: 3rem;
   padding: 29px 36px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   gap: 4rem;
   box-shadow: 32.8387px 24.5482px 79px rgba(0, 0, 0, 0.15),
@@ -118,11 +118,22 @@ main {
   background-size: cover;
 }
 
+.movie-logo.third {
+  background-image: url('../assets/halloween-kills-poster.jpg');
+  background-size: cover;
+}
+
+.movie-logo.fourth {
+  background-image: url('../assets/nope-poster.jpg');
+  background-size: cover;
+}
+
 .info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.25rem;
+  max-width: 200px;
 }
 
 .info img {
@@ -133,19 +144,23 @@ main {
   font-weight: 400;
   text-align: end;
   padding-left: 1.75rem;
-  margin-right: .5rem;
 }
 
 .score {
   background-image: url('../assets/star.svg');
   background-repeat: no-repeat;
   background-position: left;
+  margin-right: 1.25rem;
 }
 
 .like {
   background-image: url('../assets/heart.svg');
   background-repeat: no-repeat;
   background-position: left;
+}
+
+.like:hover {
+  cursor: pointer;
 }
 
 .description {
