@@ -48,6 +48,11 @@ form {
   font-size: 18px;
 }
 
+form label {
+  display: flex;
+  align-items: center;
+}
+
 .favorites {
   appearance: unset;
   width: 16px;
@@ -103,6 +108,16 @@ main {
   background-color: purple;
 }
 
+.movie-logo.first {
+  background-image: url('../assets/x-poster.jpg');
+  background-size: cover;
+}
+
+.movie-logo.second {
+  background-image: url('../assets/scream-poster.jpg');
+  background-size: cover;
+}
+
 .info {
   display: flex;
   flex-direction: column;
@@ -116,7 +131,21 @@ main {
 
 .info span {
   font-weight: 400;
-  margin-right: 1rem;
+  text-align: end;
+  padding-left: 1.75rem;
+  margin-right: .5rem;
+}
+
+.score {
+  background-image: url('../assets/star.svg');
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.like {
+  background-image: url('../assets/heart.svg');
+  background-repeat: no-repeat;
+  background-position: left;
 }
 
 .description {
