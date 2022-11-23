@@ -108,26 +108,6 @@ main {
   background-color: purple;
 }
 
-.movie-logo.first {
-  background-image: url('../assets/x-poster.jpg');
-  background-size: cover;
-}
-
-.movie-logo.second {
-  background-image: url('../assets/scream-poster.jpg');
-  background-size: cover;
-}
-
-.movie-logo.third {
-  background-image: url('../assets/halloween-kills-poster.jpg');
-  background-size: cover;
-}
-
-.movie-logo.fourth {
-  background-image: url('../assets/nope-poster.jpg');
-  background-size: cover;
-}
-
 .info {
   display: flex;
   flex-direction: column;
@@ -157,6 +137,10 @@ main {
   background-image: url('../assets/heart.svg');
   background-repeat: no-repeat;
   background-position: left;
+}
+
+.like.active {
+  background-image: url('../assets/heart-clicked.svg');
 }
 
 .like:hover {

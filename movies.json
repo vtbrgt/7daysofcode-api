@@ -1,0 +1,30 @@
+[
+  {
+    "poster": "https://m.media-amazon.com/images/M/MV5BMTJiMmE5YWItOWZjYS00YTg0LWE0MTYtMzg2ZTY4YjNkNDEzXkEyXkFqcGdeQXVyMTAzMDg4NzU0._V1_.jpg",
+    "title": "X",
+    "score": "7,9",
+    "isFavorited": true,
+    "description": "Em 1979, um grupo de jovens cineastas se propôs a fazer um filme adulto na zona rural do Texas, mas quando seus solitários e idosos anfitriões os pegam em flagrante, o elenco se vê lutando por suas vidas."
+  },
+  {
+    "poster": "https://www.themoviedb.org/t/p/original/fLVxdkURY1MbnXOigi1vciFo5pY.jpg",
+    "title": "Halloween Kills",
+    "score": "5,5",
+    "isFavorited": false,
+    "description": "Laurie Strode acredita que enfim venceu a luta contra Michael Myers, mas é surpreendida pelo seu retorno. Determinada a pôr um ponto final em seus ataques, ela e outros sobreviventes decidem enfrentá-lo e acabar com o ciclo de uma vez por todas."
+  },
+  {
+    "poster": "https://www.themoviedb.org/t/p/original/1m3W6cpgwuIyjtg5nSnPx7yFkXW.jpg",
+    "title": "Scream (2022)",
+    "score": "6,3",
+    "isFavorited": true,
+    "description": "Vinte e cinco anos após uma série de crimes brutais chocar a tranquila Woodsboro, um novo assassino se apropria da máscara de Ghostface e começa a perseguir um grupo de adolescentes para trazer à tona segredos do passado mortal da cidade."
+  },
+  {
+    "poster": "https://dx35vtwkllhj9.cloudfront.net/universalstudios/nope/images/gallery/image1.jpg",
+    "title": "Nope",
+    "score": "6,9",
+    "isFavorited": false,
+    "description": "Os cuidadores de um rancho de cavalos na Califórnia encontram uma força misteriosa que afeta o comportamento humano e animal."
+  }
+]
