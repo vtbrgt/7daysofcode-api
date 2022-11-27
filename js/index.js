@@ -3,6 +3,7 @@ import config from '../config.json' assert { type: 'json' };
 const mainContent = document.querySelector('main');
 const input = document.querySelector('.search');
 const siteTitle = document.querySelector('h1');
+const checkbox = document.querySelector('.favorites');
 
 /* FAVORITAR OU DESFAVORITAR FILME */
 function addFavoriteEvent() {
@@ -13,7 +14,7 @@ function addFavoriteEvent() {
 }
 
 function setFavoriteMovies({ target }) {
-  const titulo = target.parentNode.parentNode.querySelector('.title').innerText;
+  const id = target.parentNode.parentNode.querySelector('.title').id;
 
   target.classList.toggle('active');
 
@@ -22,10 +23,10 @@ function setFavoriteMovies({ target }) {
   }
 
   const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
-  if (!favoriteMovies.includes(titulo)) {
-    favoriteMovies.push(titulo);
+  if (!favoriteMovies.includes(id)) {
+    favoriteMovies.push(id);
   } else {
-    const index = favoriteMovies.indexOf(titulo);
+    const index = favoriteMovies.indexOf(id);
     favoriteMovies.splice(index, 1);
   }
   localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
@@ -53,17 +54,19 @@ function renderMovie(movie) {
   if (localStorage.getItem('favoriteMovies')) {
     const favoriteMovies = getFavoriteMovies();
 
-    if (favoriteMovies.includes(movie.title)) {
+    if (favoriteMovies.includes(movie.id.toString())) {
       favorite = '<span class="like active">Favoritar</span>';
     }
   }
 
   const markup = `
-        <div class="movie-logo" style="background-image: url(https://image.tmdb.org/t/p/original${movie.poster_path}); background-size: cover"></div>
+        <div class="movie-logo" style="background-image: url(https://image.tmdb.org/t/p/original${
+          movie.poster_path
+        }); background-size: cover"></div>
         <div class="info">
-            <h3 class="title">${movie.title}</h3>
+            <h3 class="title" id="${movie.id}">${movie.title}</h3>
             <div>
-                <span class="score">${movie.vote_average}</span>
+                <span class="score">${movie.vote_average.toFixed(1)}</span>
                 ${favorite}
             </div>
         </div>
@@ -89,6 +92,13 @@ async function searchMovie(value) {
   return final;
 }
 
+async function searchMovieByID(id) {
+  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${config.apikey}&language=pt-BR`;
+  const response = await fetch(url);
+  const obj = await response.json();
+  return obj;
+}
+
 async function searchMovieAfterKeyPress(event) {
   if (event.key == 'Enter' && input.value != '') {
     const searchedMovies = await searchMovie(input.value);
@@ -104,4 +114,22 @@ siteTitle.addEventListener('click', () => {
   popularMovies.forEach((movie) => renderMovie(movie));
 });
 
-// ao clicar no checkbox renderizar os filmes da lista de filmes do localStorage
+/* MOSTRAR OS FILMES FAVORITOS AO CLICAR NO CHECKBOX */
+function showFavoriteMovies() {
+  const favoriteMovies = getFavoriteMovies();
+  favoriteMovies.forEach(async (movie) => {
+    const movieData = await searchMovieByID(movie);
+    renderMovie(movieData);
+  });
+}
+
+function handleCheckbox({ target }) {
+  mainContent.innerHTML = '';
+  if (target.checked) {
+    showFavoriteMovies();
+  } else {
+    popularMovies.forEach((movie) => renderMovie(movie));
+  }
+}
+
+checkbox.addEventListener('click', handleCheckbox);
