@@ -1,8 +1,39 @@
 import config from '../config.json' assert { type: 'json' };
 
 const mainContent = document.querySelector('main');
-var favorites = document.querySelectorAll('.like');
 const input = document.querySelector('.search');
+const siteTitle = document.querySelector('h1');
+
+/* FAVORITAR OU DESFAVORITAR FILME */
+function addFavoriteEvent() {
+  const favorites = document.querySelectorAll('.like');
+  favorites.forEach((favorite) =>
+    favorite.addEventListener('click', setFavoriteMovies)
+  );
+}
+
+function setFavoriteMovies({ target }) {
+  const titulo = target.parentNode.parentNode.querySelector('.title').innerText;
+
+  target.classList.toggle('active');
+
+  if (localStorage.getItem('favoriteMovies') == null) {
+    localStorage.setItem('favoriteMovies', JSON.stringify([]));
+  }
+
+  const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies'));
+  if (!favoriteMovies.includes(titulo)) {
+    favoriteMovies.push(titulo);
+  } else {
+    const index = favoriteMovies.indexOf(titulo);
+    favoriteMovies.splice(index, 1);
+  }
+  localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
+}
+
+function getFavoriteMovies() {
+  return JSON.parse(localStorage.getItem('favoriteMovies'));
+}
 
 /* REQUISIÇÃO A TMDB API */
 /* https://api.themoviedb.org/3/ */
@@ -17,12 +48,14 @@ const popularMovies = await getPopularMovies();
 
 /* RENDERIZAR FILME DINAMICAMENTE NO HTML */
 function renderMovie(movie) {
-  let favorite;
+  let favorite = '<span class="like">Favoritar</span>';
 
-  if (movie.isFavorited) {
-    favorite = '<span class="like active">Favoritar</span>';
-  } else {
-    favorite = '<span class="like">Favoritar</span>';
+  if (localStorage.getItem('favoriteMovies')) {
+    const favoriteMovies = getFavoriteMovies();
+
+    if (favoriteMovies.includes(movie.title)) {
+      favorite = '<span class="like active">Favoritar</span>';
+    }
   }
 
   const markup = `
@@ -42,14 +75,14 @@ function renderMovie(movie) {
   card.innerHTML = markup;
 
   mainContent.appendChild(card);
-  favorites = document.querySelectorAll('.like');
+  addFavoriteEvent();
 }
 
 popularMovies.forEach((movie) => renderMovie(movie));
 
 /* PESQUISA DE FILMES */
 async function searchMovie(value) {
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${config.apikey}&language=pt-BR-en-US&query=${value}`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${config.apikey}&language=pt-BR&query=${value}`;
   const response = await fetch(url);
   const obj = await response.json();
   const final = obj.results.filter((obj) => obj.overview != '');
@@ -66,10 +99,9 @@ async function searchMovieAfterKeyPress(event) {
 
 input.addEventListener('keypress', searchMovieAfterKeyPress);
 
-/* FAVORITAR OU DESFAVORITAR FILME */
-function handleFavorite({ target }) {
-  target.classList.toggle('active');
-}
-favorites.forEach((favorite) =>
-  favorite.addEventListener('click', handleFavorite)
-);
+siteTitle.addEventListener('click', () => {
+  mainContent.innerHTML = '';
+  popularMovies.forEach((movie) => renderMovie(movie));
+});
+
+// ao clicar no checkbox renderizar os filmes da lista de filmes do localStorage

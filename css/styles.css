@@ -23,6 +23,10 @@ header h1 {
   margin-bottom: 48px;
 }
 
+header h1:hover {
+  cursor: pointer;
+}
+
 form {
   display: flex;
   flex-direction: column;
