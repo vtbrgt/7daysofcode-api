@@ -40,10 +40,14 @@ function getFavoriteMovies() {
 /* https://api.themoviedb.org/3/ */
 async function getPopularMovies() {
   const url = `https://api.themoviedb.org/3/discover/movie/?api_key=${config.apikey}&language=pt-BR`;
-  const response = await fetch(url);
-  const obj = await response.json();
-  const final = obj.results.filter((obj) => obj.overview != '');
-  return final;
+  try {
+    const response = await fetch(url);
+    const obj = await response.json();
+    const final = obj.results.filter((obj) => obj.overview != '');
+    return final;
+  } catch (error) {
+    console.log(error);
+  }
 }
 const popularMovies = await getPopularMovies();
 
@@ -86,17 +90,25 @@ popularMovies.forEach((movie) => renderMovie(movie));
 /* PESQUISA DE FILMES */
 async function searchMovie(value) {
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${config.apikey}&language=pt-BR&query=${value}`;
-  const response = await fetch(url);
-  const obj = await response.json();
-  const final = obj.results.filter((obj) => obj.overview != '');
-  return final;
+  try {
+    const response = await fetch(url);
+    const obj = await response.json();
+    const final = obj.results.filter((obj) => obj.overview != '');
+    return final;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function searchMovieByID(id) {
   const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${config.apikey}&language=pt-BR`;
-  const response = await fetch(url);
-  const obj = await response.json();
-  return obj;
+  try {
+    const response = await fetch(url);
+    const obj = await response.json();
+    return obj;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function searchMovieAfterKeyPress(event) {
@@ -104,6 +116,7 @@ async function searchMovieAfterKeyPress(event) {
     const searchedMovies = await searchMovie(input.value);
     mainContent.innerHTML = '';
     searchedMovies.forEach((movie) => renderMovie(movie));
+    input.value = '';
   }
 }
 
