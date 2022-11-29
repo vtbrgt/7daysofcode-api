@@ -3,11 +3,10 @@ import { getFavoriteMovies } from '../modules/localStorage.js';
 import { renderMovie } from '../modules/render.js';
 
 const mainContent = document.querySelector('main');
-const apikey = 'aa86d7264e7595e6dd88b54da2d8fa9e';
 
 /* REQUISIÇÃO A TMDB API */
 export async function getPopularMovies() {
-  const url = `https://api.themoviedb.org/3/discover/movie/?api_key=${apikey}&language=pt-BR`;
+  const url = `https://api.themoviedb.org/3/discover/movie/?api_key=aa86d7264e7595e6dd88b54da2d8fa9e&language=pt-BR`;
   try {
     const response = await fetch(url);
     const obj = await response.json();
@@ -20,7 +19,7 @@ export async function getPopularMovies() {
 
 /* PESQUISA DE FILMES */
 async function searchMovie(value) {
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&language=pt-BR&query=${value}`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=aa86d7264e7595e6dd88b54da2d8fa9e&language=pt-BR&query=${value}`;
   try {
     const response = await fetch(url);
     const obj = await response.json();
@@ -41,7 +40,7 @@ export async function searchMovieAfterKeyPress(event) {
 }
 
 async function searchMovieByID(id) {
-  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apikey}&language=pt-BR`;
+  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=aa86d7264e7595e6dd88b54da2d8fa9e&language=pt-BR`;
   try {
     const response = await fetch(url);
     const obj = await response.json();
