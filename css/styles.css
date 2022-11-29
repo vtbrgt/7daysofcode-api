@@ -16,6 +16,10 @@ body {
 header {
   text-align: center;
   margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 header h1 {
@@ -87,14 +91,14 @@ main {
 }
 
 .movie-card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   width: 1224px;
   background-color: #1d1c3b;
   border-radius: 8px;
   margin-bottom: 3rem;
   padding: 29px 36px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   gap: 4rem;
   box-shadow: 32.8387px 24.5482px 79px rgba(0, 0, 0, 0.15),
     23.8851px 17.855px 53.2479px rgba(0, 0, 0, 0.121406),
@@ -156,4 +160,23 @@ main {
 .description {
   max-width: 590px;
   color: #acacac;
+}
+
+@media (max-width: 426px) {
+  body {
+    width: 100%;
+  }
+
+  .search {
+    max-width: 80vw;
+  }
+
+  .search::placeholder {
+    font-size: 14px;
+  }
+
+  .movie-card {
+    flex-direction: column;
+    max-width: 90%;
+  }
 }
