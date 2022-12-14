@@ -12,7 +12,11 @@ const popularMovies = await getPopularMovies();
 export function handleCheckbox({ target }) {
   mainContent.innerHTML = '';
   if (target.checked) {
-    showFavoriteMovies();
+    if (localStorage.getItem('favoriteMovies') == null) {
+      mainContent.innerHTML = `
+        <h2>Você ainda não tem nenhum filme favorito =(</h2>
+      `;
+    } else showFavoriteMovies();
   } else {
     popularMovies.forEach((movie) => renderMovie(movie));
   }
