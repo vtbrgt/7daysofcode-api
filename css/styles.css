@@ -90,6 +90,10 @@ main {
   align-items: center;
 }
 
+main h2 {
+  text-align: center;
+}
+
 .movie-card {
   display: flex;
   justify-content: space-around;
